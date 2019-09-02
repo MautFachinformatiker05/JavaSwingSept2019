@@ -1,0 +1,201 @@
+import java.awt.BorderLayout;
+import java.awt.Button;
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.Desktop;
+import java.awt.GraphicsEnvironment;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
+import java.net.URL;
+
+import javax.swing.GroupLayout;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+
+public class MyWindow extends JFrame {
+	public MyWindow(){
+		setSize(400,300);
+		setTitle("In eigener Klasse");
+		setLocationRelativeTo(null);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		
+		JButton button_top =new JButton("Top");
+		JButton button_bottom =new JButton("Bottom");
+		JButton button_left =new JButton("Left");
+		JButton button_right =new JButton("Right");
+		JButton button_center =new JButton("Center");
+		JButton button_center2 =new JButton("Center");
+		ActionListener3 test = new ActionListener3();
+		button_top.addActionListener( test);
+		button_bottom.addActionListener( test);
+		button_left.addActionListener(test);
+		button_right.addActionListener(test);
+		button_center.addActionListener( test);
+
+		ActionListener a = new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String text = ((JButton) e.getSource()).getText();
+			}
+		};
+		JMenu untermenu = new JMenu("Untermenu");
+		ImageIcon clown = new ImageIcon("C:\\Test\\love.png");
+		ImageIcon clown2 = new ImageIcon("love.png");
+		JMenuBar menubar = new JMenuBar();
+		JMenu datei_menu=new JMenu("Datei");
+		JMenuItem kauf_item = new JMenuItem("Kauft mich");
+		JMenuItem about_item = new JMenuItem("About",clown);
+		JMenuItem quit_item = new JMenuItem("quit",clown2);
+		JMenuItem berichtsheft_item= new JMenuItem("Berichtsheft");
+		JMenuItem a_item = new JMenuItem("A");
+		JMenuItem b_item = new JMenuItem("B");
+		menubar.add(datei_menu);
+		datei_menu.add(kauf_item);
+		datei_menu.add(about_item);
+		datei_menu.add(quit_item);
+		datei_menu.add(berichtsheft_item);
+		untermenu.add(a_item);
+		untermenu.add(b_item);
+		datei_menu.add(untermenu);
+		setJMenuBar(menubar);
+		
+				
+		
+		File datei = new File("C:\\Test\\KW 1 2018-12-31 bis 2019-01-04_ManuelUnverdorben.docx");
+		berichtsheft_item.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Desktop desktop= Desktop.getDesktop();
+				try {
+					desktop.open(datei);
+				} catch (IOException e1) {
+					
+					e1.printStackTrace();
+				}
+			}
+		});
+		quit_item.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
+		about_item.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "Manuel U." );
+			}
+		});
+		kauf_item.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Desktop desktop=Desktop.getDesktop();
+				URL url = null;
+				try {
+					url=new URL("https://www.infowarsstore.com/brain-force.html");
+				} catch (MalformedURLException e1) {
+					
+					e1.printStackTrace();
+				}
+				try {
+					desktop.browse(url.toURI());
+				} catch (IOException | URISyntaxException e1) {
+					
+					e1.printStackTrace();
+				}
+			}
+		});
+		
+		
+//		button_top.addActionListener(new ActionListener() {
+//			
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				System.out.println("Top");
+//			}
+//		});
+//		button_bottom.addActionListener(new ActionListener() {
+//
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				System.out.println("Bottom");
+//			}
+//		});
+//		button_left.addActionListener(new ActionListener() {
+//
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				System.out.println("Left");
+//			}
+//		});
+//		button_right.addActionListener(new ActionListener() {
+//
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				System.out.println("Right");
+//			}
+//		});
+//		button_center.addActionListener(new ActionListener() {
+//
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				System.out.println("Center");
+//			}
+//		});
+//		button_center2.addActionListener(new ActionListener() {
+//
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				System.out.print("\b");
+//			}
+//		});
+		Container pane = getContentPane();
+//		System.out.println("Hi");
+//		pane.add(button_top, BorderLayout.PAGE_START);
+//		pane.add(button_bottom, BorderLayout.PAGE_END);
+//		pane.add(button_left, BorderLayout.LINE_START);
+//		pane.add(button_right, BorderLayout.LINE_END);
+//		pane.add(button_top, BorderLayout.NORTH);
+//		pane.add(button_center, BorderLayout.CENTER);
+//		pane.add(button_center2, BorderLayout.CENTER);
+//		
+//		JButton button =new JButton("Ende");
+//		button.addActionListener(new ActionListener() {
+//			
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				System.exit(0);
+//			}
+//		});
+//		
+		
+		
+	}
+	
+
+	
+}
+ class ActionListener3 implements ActionListener {
+	
+	public void actionPerformed(ActionEvent e) {
+		JButton m = (JButton) e.getSource();
+		String text =m.getText();
+		System.out.println(text);
+	}
+}
+
